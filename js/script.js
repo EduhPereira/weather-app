@@ -12,6 +12,53 @@ const temperature = document.querySelector('.weather__temperature>.value');
 
 let weatherBaseEndPoint = 'https://api.openweathermap.org/data/2.5/weather?units=metric&appid=' + weatherAPIKey;
 
+const weatherImages = [
+    {
+        url: 'assets/images/clear-sky.png',
+        ids: [800]
+    },
+
+    {
+        url: 'assets/images/broken-clouds.png',
+        ids: [803, 804]
+    },
+
+    {
+        url: 'assets/images/few-clouds.png',
+        ids: [801]
+    },
+
+    {
+        url: 'assets/images/mist.png',
+        ids: [701, 711, 721, 731, 741, 751, 761, 762, 771, 781]
+    },
+    
+    {
+        url: 'assets/images/rain.png',
+        ids: [500, 501, 502, 503, 504]
+    },
+
+    {
+        url: 'assets/images/scattered-clouds.png',
+        ids: [802]
+    },
+
+    {
+        url: 'assets/images/shower-rain.png',
+        ids: [300, 301, 302, 310, 311, 312, 313, 314, 321, 520, 521, 522, 531]
+    },
+
+    {
+        url: 'assets/images/snow.png',
+        ids: [511, 600, 601, 602, 611, 612, 613, 615, 616, 620, 621, 622]
+    },
+
+    {
+        url: 'assets/images/thunderstorm.png',
+        ids: [200, 201, 202, 210, 211, 212, 220, 221, 230, 231, 232]
+    }
+]
+
 const getWeatherByCityName = async (city) =>{
     let endpoint = weatherBaseEndPoint + '&q=' + city;
     let response = await fetch(endpoint);
@@ -48,6 +95,14 @@ const updateCurrentWeather = (data) => {
     wind.textContent = windDirection + ', ' + data.wind.speed;
 
     temperature.textContent = data.main.temp > 0 ? '+' + Math.round(data.main.temp) : Math.round(data.main.temp);
+
+    let imgID = data.weather[0].id;
+
+    weatherImages.forEach(obj => {
+        if(obj.ids.includes(imgID)){
+            image.src = obj.url;
+        }
+    });
 }
 
 const dayOfWeek = () => {
