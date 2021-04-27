@@ -1,7 +1,10 @@
 const weatherAPIKey = '4cfac69bf0d24aaac253da6ec1fa0c54';
 
-let search = document.querySelector('.weather__search');
 
+// body.style.backgroundImage = `url('assets/images/broken-clouds.png')`;
+
+const body = document.querySelector('body');
+let search = document.querySelector('.weather__search');
 const city = document.querySelector('.weather__city');
 const day = document.querySelector('.weather__day');
 const humidity = document.querySelector('.weather__indicator--humidity>.value');
@@ -17,47 +20,56 @@ let cityBaseEndPoint = 'https://api.teleport.org/api/cities/?search=';
 const weatherImages = [
     {
         url: 'assets/images/clear-sky.png',
-        ids: [800]
+        ids: [800],
+        bg: 'assets/images/clearsky-bg.png'
     },
 
     {
         url: 'assets/images/broken-clouds.png',
-        ids: [803, 804]
+        ids: [803, 804],
+        bg: 'assets/images/broken-clouds-bg.jpg'
     },
 
     {
         url: 'assets/images/few-clouds.png',
-        ids: [801]
+        ids: [801],
+        bg: 'assets/images/scattered-clouds-bg.jpg'
     },
 
     {
         url: 'assets/images/mist.png',
-        ids: [701, 711, 721, 731, 741, 751, 761, 762, 771, 781]
+        ids: [701, 711, 721, 731, 741, 751, 761, 762, 771, 781],
+        bg: 'assets/images/mist-bg.jpeg'
     },
     
     {
         url: 'assets/images/rain.png',
-        ids: [500, 501, 502, 503, 504]
+        ids: [500, 501, 502, 503, 504],
+        bg: 'assets/images/rain-bg.jpeg'
     },
 
     {
         url: 'assets/images/scattered-clouds.png',
-        ids: [802]
+        ids: [802],
+        bg: 'assets/images/scattered-clouds-bg.jpg'
     },
 
     {
         url: 'assets/images/shower-rain.png',
-        ids: [300, 301, 302, 310, 311, 312, 313, 314, 321, 520, 521, 522, 531]
+        ids: [300, 301, 302, 310, 311, 312, 313, 314, 321, 520, 521, 522, 531],
+        bg: 'assets/images/rain-bg.jpeg'
     },
 
     {
         url: 'assets/images/snow.png',
-        ids: [511, 600, 601, 602, 611, 612, 613, 615, 616, 620, 621, 622]
+        ids: [511, 600, 601, 602, 611, 612, 613, 615, 616, 620, 621, 622],
+        bg: 'assets/images/snow-bg.jpg'
     },
 
     {
         url: 'assets/images/thunderstorm.png',
-        ids: [200, 201, 202, 210, 211, 212, 220, 221, 230, 231, 232]
+        ids: [200, 201, 202, 210, 211, 212, 220, 221, 230, 231, 232],
+        bg: 'assets/images/Thunderstorm-bg.jpg'
     }
 ]
 
@@ -133,6 +145,7 @@ const updateCurrentWeather = (data) => {
     weatherImages.forEach(obj => {
         if(obj.ids.includes(imgID)){
             image.src = obj.url;
+            body.style.backgroundImage = `url('${obj.bg}')`;
         }
     });
 }
