@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300&display=swap');
+
 * {
   margin: 0;
   padding: 0;
@@ -10,8 +12,10 @@ body {
   height: 100vh;
   background-image: radial-gradient(circle, #1c7fc2 0%, #009cdc 28%, #0d9ade 32%, #011884 100%);
   color: #fff;
+
+  font-family: 'Quicksand', sans-serif;
   font-weight: 300;
-  font-size: 22px;
+  font-size: 20px;
 }
 
 .weather{
@@ -57,7 +61,7 @@ body {
 
 .weather__image{
     width: 30vmin;
-    margin: 20px 0;
+    margin: 15px 0;
     align-self: center;
 }
 
@@ -87,6 +91,10 @@ body {
     background-image: url('../assets/images/pressure.png');
 }
 
+.weather__current{
+    margin: 25px 0;
+}
+
 .weather__temperature{
-    font-size: 60px;
+    font-size: 45px;
 }

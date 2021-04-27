@@ -9,8 +9,10 @@ const wind = document.querySelector('.weather__indicator--wind>.value');
 const pressure = document.querySelector('.weather__indicator--pressure>.value');
 const image = document.querySelector('.weather__image');
 const temperature = document.querySelector('.weather__temperature>.value');
+const suggestions = document.querySelector('#suggestions');
 
 let weatherBaseEndPoint = 'https://api.openweathermap.org/data/2.5/weather?units=metric&appid=' + weatherAPIKey;
+let cityBaseEndPoint = 'https://api.teleport.org/api/cities/?search=';
 
 const weatherImages = [
     {
@@ -59,9 +61,23 @@ const weatherImages = [
     }
 ]
 
-const getWeatherByCityName = async (city) =>{
+const getWeatherByCityName = async (cityString) =>{
+    let city;
+
+    if(cityString.includes(',')){
+        city = cityString.substring(0, cityString.indexOf(',')) + cityString.substring(cityString.lastIndexOf(','));
+    }else{
+        city = cityString;
+    }
+
     let endpoint = weatherBaseEndPoint + '&q=' + city;
     let response = await fetch(endpoint);
+
+    if(response.status !== 200){
+        alert('City not Found!');
+        return;
+    }
+
     let weather = await response.json();
     return weather;
 }
@@ -69,7 +85,23 @@ const getWeatherByCityName = async (city) =>{
 search.addEventListener('keydown', async (e) => {
     if(e.keyCode === 13){
         let weather = await getWeatherByCityName(search.value);
+        if(!weather){
+            return;
+        }
         updateCurrentWeather(weather);
+    }
+})
+
+search.addEventListener('input', async () => {
+    let endpoint = cityBaseEndPoint + search.value;
+    let result = await (await fetch(endpoint)).json();
+    suggestions.innerHTML = '';
+    let citties = result._embedded['city:search-results'];
+    let length = citties.length > 5 ? 5 : citties.length;
+    for(let i = 0; i < length; i++){
+        let option = document.createElement('option');
+        option.value = citties[i].matching_full_name;
+        suggestions.appendChild(option);
     }
 })
 
@@ -108,4 +140,3 @@ const updateCurrentWeather = (data) => {
 const dayOfWeek = () => {
     return new Date().toLocaleDateString('en-EN', {'weekday': 'long'});
 }
-

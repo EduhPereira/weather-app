@@ -10,7 +10,8 @@
 <body>
     
     <div class="weather">
-        <input type="search" class="weather__search" placeholder="Your City">
+        <input type="search" list="suggestions" class="weather__search" placeholder="Your City">
+        <datalist id="suggestions"></datalist>
 
         <div class="weather__today">
 
@@ -20,16 +21,16 @@
                 <p class="weather__day">Day</p>
 
                 <div class="weather__current">
-                    <p class="weather__indicator weather__indicator--humidity"><span class="value">50</span>%</p>
-                    <p class="weather__indicator weather__indicator--wind"><span class="value">West, 5</span>m/s</p>
-                    <p class="weather__indicator weather__indicator--pressure"><span class="value">1050</span>hPA</p>
+                    <p class="weather__indicator weather__indicator--humidity"><span class="value"></span>%</p>
+                    <p class="weather__indicator weather__indicator--wind"><span class="value">NSLW, </span>m/s</p>
+                    <p class="weather__indicator weather__indicator--pressure"><span class="value"></span>hPA</p>
                 </div>
 
             </div>
 
             <img src="./assets/images/clear-sky.png" alt="clear sky" class="weather__image">
 
-            <div class="weather__temperature"><span class="value">+25</span> &deg;C</div>
+            <div class="weather__temperature"><span class="value">+</span> &deg;C</div>
 
         </div>
     </div>
