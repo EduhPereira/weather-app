@@ -20,6 +20,7 @@ body {
 
 .weather{
     width: 80%;
+    max-width: 800px;
     height: 100%;
     margin: 0 auto;
     padding: 20px 0;
